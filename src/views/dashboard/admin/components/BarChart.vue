@@ -61,13 +61,16 @@ export default {
           containLabel: true
         },
         xAxis: [{
+          // 坐标轴类型。'category' 类目轴，适用于离散的类目数据
           type: 'category',
           data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          // 坐标轴刻度相关设置。
           axisTick: {
             alignWithLabel: true
           }
         }],
         yAxis: [{
+          // 'value' 数值轴，适用于连续数据。
           type: 'value',
           axisTick: {
             show: false

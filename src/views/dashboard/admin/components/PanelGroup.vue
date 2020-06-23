@@ -1,7 +1,13 @@
 <template>
+  <!-- 通过 row 和 col 组件，并通过 col 组件的 span 属性我们就可以自由地组合布局。 -->
+  <!-- 通过基础的 24 分栏，迅速简便地创建布局。gutter 属性来指定每一栏之间的间隔，默认间隔为 0。 -->
   <el-row :gutter="40" class="panel-group">
+    <!-- 预设了五个响应尺寸：xs、sm、md、lg 和 xl。响应式布局指的是同一页面在不同屏幕尺寸下有不同的布局 -->
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
+      <!-- 子组件方法，绑定事件监听器。事件类型：click   事件的处理程序：handleSetLineChartData -->
+      <!-- HTML事件是发生在 HTML 元素上的“事情”。 事件属性click-->
       <div class="card-panel" @click="handleSetLineChartData('newVisitis')">
+        <!-- <div> 是一个块级元素。这意味着它的内容自动地开始一个新行。实际上换行是 <div> 固有的唯一格式表现 -->
         <div class="card-panel-icon-wrapper icon-people">
           <svg-icon icon-class="peoples" class-name="card-panel-icon" />
         </div>
@@ -9,6 +15,7 @@
           <div class="card-panel-text">
             New Visits
           </div>
+          <!-- vue-countTo是一个无依赖，轻量级的vue组件。你可以设置 startVal 和 endVal，它会自动判断计数或倒计时 -->
           <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
         </div>
       </div>
@@ -40,6 +47,7 @@
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
+      <!-- 调用子组件方法 -->
       <div class="card-panel" @click="handleSetLineChartData('shoppings')">
         <div class="card-panel-icon-wrapper icon-shopping">
           <svg-icon icon-class="shopping" class-name="card-panel-icon" />
@@ -64,6 +72,8 @@ export default {
   },
   methods: {
     handleSetLineChartData(type) {
+      // 当子组件发生更改时需要告诉父项。 为此可以使用自定义事件,handleSetLineChartData为事件名。
+      // 触发当前实例上的事件handleSetLineChartData，附加参数type会传给监听器回调。
       this.$emit('handleSetLineChartData', type)
     }
   }

@@ -1,6 +1,7 @@
 <template>
+  <!-- section标签定义文档中的节（section、区段）。比如章节、页眉、页脚或文档中的其他部分。 -->
   <section class="todoapp">
-    <!-- header -->
+    <!-- header 标签定义文档的页眉（介绍信息）。-->
     <header class="header">
       <input class="new-todo" autocomplete="off" placeholder="Todo List" @keyup.enter="addTodo">
     </header>
@@ -8,7 +9,9 @@
     <section v-show="todos.length" class="main">
       <input id="toggle-all" :checked="allChecked" class="toggle-all" type="checkbox" @change="toggleAll({ done: !allChecked })">
       <label for="toggle-all" />
+      <!-- 有序列表始于ol标签。 -->
       <ul class="todo-list">
+        <!-- v-for 可以绑定数据到数组来渲染一个列表，并且调用子组件todo的方法 -->
         <todo
           v-for="(todo, index) in filteredTodos"
           :key="index"
@@ -19,7 +22,7 @@
         />
       </ul>
     </section>
-    <!-- footer -->
+    <!-- footer 标签定义文档或节的页脚。-->
     <footer v-show="todos.length" class="footer">
       <span class="todo-count">
         <strong>{{ remaining }}</strong>

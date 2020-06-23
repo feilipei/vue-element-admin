@@ -1,15 +1,18 @@
 <template>
   <div class="login-container">
+    <!-- 使用 v-model 实现双向数据绑定 -->
+    <!-- 通过ref属性引用的形式来操作DOM。 -->
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
 
       <div class="title-container">
         <h3 class="title">Login Form</h3>
       </div>
-
+      <!-- 在 Form 组件中，每一个表单域由一个 Form-Item 组件构成，表单域中可以放置各种类型的表单控件 -->
       <el-form-item prop="username">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
+        <!-- Input 为受控组件，它总会显示Vue绑定值。 使用v-model实现双向数据绑定-->
         <el-input
           ref="username"
           v-model="loginForm.username"
@@ -20,7 +23,7 @@
           autocomplete="on"
         />
       </el-form-item>
-
+      <!-- tooltip常用于展示鼠标 hover 时的提示信息。 -->
       <el-tooltip v-model="capsTooltip" content="Caps lock is On" placement="right" manual>
         <el-form-item prop="password">
           <span class="svg-container">
@@ -44,7 +47,7 @@
           </span>
         </el-form-item>
       </el-tooltip>
-
+      <!-- loading是否加载中状态，点击按钮进行数据加载，在按钮上显示加载状态 width属性不包括填充、边框和边距，%表示基于父元素的百分比宽度 -->
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
 
       <div style="position:relative">
@@ -78,9 +81,9 @@ import { validUsername } from '@/utils/validate'
 import SocialSign from './components/SocialSignin'
 
 export default {
-  name: 'Login',
-  components: { SocialSign },
-  data() {
+  name: 'Login', // 组件名
+  components: { SocialSign }, // 注册子组件
+  data() { // 子组件，data函数
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
         callback(new Error('Please enter the correct user name'))
@@ -112,8 +115,10 @@ export default {
       otherQuery: {}
     }
   },
+  // 一个对象：键是需要观察的表达式，值是对应回调函数。值也可以是方法名，或者包含选项的对象。Vue 实例将会在实例化时调用 $watch()，遍历 watch 对象的每一个属性。
   watch: {
     $route: {
+      // handler函数
       handler: function(route) {
         const query = route.query
         if (query) {
@@ -129,6 +134,8 @@ export default {
   },
   mounted() {
     if (this.loginForm.username === '') {
+      // 通过this.$refs 可以访问到此vue实例中的所有设置了ref属性的DOM元素，并对其进行操作
+      // $refs 是一个对象，持有已注册过 ref 的所有的子组件。
       this.$refs.username.focus()
     } else if (this.loginForm.password === '') {
       this.$refs.password.focus()
@@ -156,6 +163,7 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
+          // dispatch：含有异步操作，向后台提交数据
           this.$store.dispatch('user/login', this.loginForm)
             .then(() => {
               this.$router.push({ path: this.redirect || '/', query: this.otherQuery })

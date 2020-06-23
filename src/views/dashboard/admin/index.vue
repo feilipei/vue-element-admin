@@ -1,13 +1,17 @@
 <template>
   <div class="dashboard-editor-container">
+    <!-- 0、GitHub链接 -->
     <github-corner class="github-corner" />
 
     <panel-group @handleSetLineChartData="handleSetLineChartData" />
 
+    <!-- 2、线性趋势图 -->
+    <!-- padding 就是内容与边框的空隙。而margin则是模块与模块的空隙 -->
     <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
       <line-chart :chart-data="lineChartData" />
     </el-row>
 
+    <!-- 3、雷达图、饼图、柱状图 -->
     <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
@@ -26,14 +30,18 @@
       </el-col>
     </el-row>
 
+    <!-- 4、交易表、待办列表、卡片 -->
     <el-row :gutter="8">
       <el-col :xs="{span: 24}" :sm="{span: 24}" :md="{span: 24}" :lg="{span: 12}" :xl="{span: 12}" style="padding-right:8px;margin-bottom:30px;">
+        <!-- 交易表 -->
         <transaction-table />
       </el-col>
       <el-col :xs="{span: 24}" :sm="{span: 12}" :md="{span: 12}" :lg="{span: 6}" :xl="{span: 6}" style="margin-bottom:30px;">
+        <!-- 待办事项列表 -->
         <todo-list />
       </el-col>
       <el-col :xs="{span: 24}" :sm="{span: 12}" :md="{span: 12}" :lg="{span: 6}" :xl="{span: 6}" style="margin-bottom:30px;">
+        <!-- 卡片 -->
         <box-card />
       </el-col>
     </el-row>
@@ -41,6 +49,7 @@
 </template>
 
 <script>
+// 引入子组件
 import GithubCorner from '@/components/GithubCorner'
 import PanelGroup from './components/PanelGroup'
 import LineChart from './components/LineChart'
@@ -51,6 +60,7 @@ import TransactionTable from './components/TransactionTable'
 import TodoList from './components/TodoList'
 import BoxCard from './components/BoxCard'
 
+// const声明一个只读的常量。一旦声明常量的值就不能改变。
 const lineChartData = {
   newVisitis: {
     expectedData: [100, 120, 161, 134, 105, 160, 165],
@@ -72,6 +82,7 @@ const lineChartData = {
 
 export default {
   name: 'DashboardAdmin',
+  // 注册子组件
   components: {
     GithubCorner,
     PanelGroup,

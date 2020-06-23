@@ -1,4 +1,6 @@
 <template>
+  <!-- 将信息聚合在卡片容器中展示。 -->
+  <!-- Card 组件包括header和body部分，header部分需要有显式具名 slot 分发，同时也是可选的。 -->
   <el-card class="box-card-component" style="margin-left:8px;">
     <div slot="header" class="box-card-header">
       <img src="https://wpimg.wallstcn.com/e7d23d71-cf19-4b90-a1cc-f56af8c0903d.png">
@@ -51,6 +53,7 @@ export default {
       }
     }
   },
+  // 计算属性将被混入到 Vue 实例中。所有 getter 和 setter 的 this 上下文自动地绑定为 Vue 实例。
   computed: {
     ...mapGetters([
       'name',

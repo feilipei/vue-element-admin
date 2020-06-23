@@ -2,9 +2,11 @@
   <div class="dashboard-editor-container">
     <div class=" clearfix">
       <pan-thumb :image="avatar" style="float: left">
+        <!-- Float（浮动）会使元素向左或向右移动，其周围的元素也会重新排列。 -->
         Your roles:
         <span v-for="item in roles" :key="item" class="pan-info-roles">{{ item }}</span>
       </pan-thumb>
+      <!-- position 属性指定了元素的定位类型。 -->
       <github-corner style="position: absolute; top: 0px; border: 0; right: 0;" />
       <div class="info-container">
         <span class="display_name">{{ name }}</span>
@@ -12,6 +14,7 @@
       </div>
     </div>
     <div>
+      <!-- img是空标签，它只包含属性并且没有闭合标签。src 指 "source"。源属性的值是图像的 URL 地址。 -->
       <img :src="emptyGif" class="emptyGif">
     </div>
   </div>
@@ -32,9 +35,9 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'name',
-      'avatar',
-      'roles'
+      'name', // 用户名
+      'avatar', // 头像
+      'roles' // 角色
     ])
   }
 }
@@ -48,9 +51,9 @@ export default {
   }
 
   .dashboard-editor-container {
-    background-color: #e3e3e3;
-    min-height: 100vh;
-    padding: 50px 60px 0px;
+    background-color: #e3e3e3; //背景色
+    min-height: 100vh; //
+    padding: 50px 60px 0px; //填充大小：定义元素边框与元素内容之间的空间，即上下左右的内边距。
     .pan-info-roles {
       font-size: 12px;
       font-weight: 700;
